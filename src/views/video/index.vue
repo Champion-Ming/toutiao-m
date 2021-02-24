@@ -1,16 +1,21 @@
 <template>
-  <div id="app">
-<router-view></router-view>
+  <div class="video-container">
+视频
   </div>
 </template>
 
 <script>
 export default {
+  name: '',
+  components: {},
+  props: {},
   data () {
     return {
-      name: 'APP'
+      name: 'videoPage'
     }
   },
+  computed: {},
+  watch: {},
   created () {
 
   },
