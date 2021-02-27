@@ -44,7 +44,7 @@ export default {
   data () {
     return {
       user: {
-        mobile: '13911111111',
+        mobile: '18612345678',
         code: '246810'
       },
       formdataRules: {
@@ -135,7 +135,7 @@ export default {
     color: #fff;
 }
     .getyanzheng {
-    width: 157px;
+    width: 180px;
     height: 46px;
     line-height: 46px;
     font-size: 22px;
