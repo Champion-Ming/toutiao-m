@@ -26,6 +26,12 @@ export default {
       required: true
     }
   },
+  inject: {
+    articleId: {
+      type: [Number, Array, Object],
+      default: null
+    }
+  },
   data () {
     return {
       message: ''
@@ -40,9 +46,9 @@ export default {
       })
       try {
         const { data } = await addComments({
-          target: this.target, //  评论的目标id
+          target: this.target.toString(), //  评论的目标id
           content: this.message, //  评论内容
-          art_id: null //  文章id
+          art_id: this.articleId ? this.articleId.toString() : this.articleId //  文章id
         })
         this.$toast.success('发布评论成功！')
         this.message = ''

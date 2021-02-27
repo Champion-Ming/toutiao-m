@@ -62,8 +62,8 @@
     >
     <comment-post :target= 'articleList.art_id' @success = "onPostSuccess"/>
     </van-popup>
-    <van-popup v-model="isCommentShow" position="bottom"  :style="{ height: '80%' }" >
-      <comment-reply :ReplyList = "commentReplyList"/>
+    <van-popup v-model="isCommentShow" position="bottom"  :style="{ height: '100%' }"  get-container="body">
+      <comment-reply :ReplyList = "commentReplyList" @close="isCommentShow = false" v-if="isCommentShow"/>
     </van-popup>
       </div>
 
@@ -113,6 +113,11 @@ export default {
     articleId: {
       type: [Number, String, Object],
       required: true
+    }
+  },
+  provide: function () {
+    return {
+      articleId: this.articleId
     }
   },
   data () {
