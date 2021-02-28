@@ -72,3 +72,11 @@ export const updateUserFile = data => {
     data
   })
 }
+
+export const getAvatarPhoto = data => {
+  return request({
+    method: 'PATCH',
+    url: '/v1_0/user/photo',
+    data
+  })
+}

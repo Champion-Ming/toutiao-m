@@ -1,7 +1,7 @@
 <template>
   <div class="profileContainer">
 <van-nav-bar title="个人中心" left-arrow @click-left="$router.back()"/>
-<van-cell title="头像" is-link>
+<van-cell title="头像" is-link @click="$refs.file.click()">
   <van-image
   class="avatar"
   :src="user.photo"
@@ -24,11 +24,18 @@
 <van-popup position="bottom" v-model="isUpdateBirthdayshow" >
   <update-birthday v-model="user.birthday" @close="isUpdateBirthdayshow=false"/>
 </van-popup>
+<!-- 文件input框 -->
+<input type="file" hidden @change="avatarHandle" ref="file"/>
+<!-- 头像文件的展示层 -->
+<van-popup v-model="isUpdateImgShow" position="bottom" :style="{ height: '100%' }" >
+  <update-avatar :img='avatarImage' v-if="isUpdateImgShow" @close="isUpdateImgShow = false" @update-avatar="user.photo = $event"/>
+</van-popup>
   </div>
 </template>
 
 <script>
 import { getUserProfile } from '../../api/user'
+import UpdateAvatar from './components/update-avatar'
 import UpdateBirthday from '../userProfile/components/update-birthday.vue'
 import UpdateGender from '../userProfile/components/update-gender.vue'
 import UpdateName from '../userProfile/components/update-name.vue'
@@ -37,7 +44,8 @@ export default {
   components: {
     UpdateName,
     UpdateGender,
-    UpdateBirthday
+    UpdateBirthday,
+    UpdateAvatar
   },
   props: {},
   data () {
@@ -45,7 +53,9 @@ export default {
       user: {},
       isUpdateNameshow: false,
       isUpdateGendershow: false,
-      isUpdateBirthdayshow: false
+      isUpdateBirthdayshow: false,
+      isUpdateImgShow: false,
+      avatarImage: null
     }
   },
   computed: {},
@@ -70,6 +80,12 @@ export default {
       } catch (error) {
         this.$toast('获取用户信息失败！')
       }
+    },
+    avatarHandle () {
+      const files = this.$refs.file.files[0]
+      this.avatarImage = window.URL.createObjectURL(files)
+      this.isUpdateImgShow = true
+      this.$refs.file.value = ''
     }
   }
 }
