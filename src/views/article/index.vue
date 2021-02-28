@@ -2,7 +2,9 @@
 <!-- 110509 -->
   <div class="article-container">
     <!-- 导航栏 -->
-    <van-nav-bar class="page-nav-bar" left-arrow title="黑马头条"></van-nav-bar>
+    <van-nav-bar class="page-nav-bar" title="黑马头条">
+      <van-icon slot="left" name="arrow-left" @click="toHtmlIndex"/>
+    </van-nav-bar>
 
     <div class="main-wrap">
       <!-- 加载中 -->
@@ -174,6 +176,9 @@ export default {
     onReplyClick (data) {
       this.isCommentShow = true
       this.commentReplyList = data
+    },
+    toHtmlIndex () {
+      this.$router.push('/')
     }
   }
 }
